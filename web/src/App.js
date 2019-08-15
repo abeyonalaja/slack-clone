@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import "./App.css";
+import Home from "./containers/Home";
+import NotFound from "./containers/NotFound";
+import { ConnectedRouter } from "react-router-redux";
+import { Provider } from "react-redux";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = ({ history, store }) => (
+  // <Provider store={store}>
+  //   <ConnectedRouter history={history}>
+  //     <Switch>
+  //       <Route path="/" component={Home} />
+  //     </Switch>
+  //   </ConnectedRouter>
+  // </Provider>
+
+  <Router>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="*" component={NotFound} />
+    </Switch>
+  </Router>
+);
 
 export default App;
