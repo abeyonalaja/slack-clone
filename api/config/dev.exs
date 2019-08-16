@@ -22,6 +22,9 @@ config :sling, SlingWeb.Endpoint,
   check_origin: false,
   watchers: []
 
+config :sling, Sling.Auth.Guardian,
+  secret_key: "uL+bhNkUwWedDlYApSumS8Zr3fKhjsBK1KH9IPubvxASErhPOToQc5lqxcxF42+E"
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

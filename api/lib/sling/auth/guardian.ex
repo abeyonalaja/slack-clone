@@ -1,7 +1,7 @@
 defmodule Sling.Auth.Guardian do
   @moduledoc false
 
-  use Guardian, otp_app: :prollo
+  use Guardian, otp_app: :sling
   alias Sling.Accounts
 
   def subject_for_token(%Accounts.User{} = user, _claims) do

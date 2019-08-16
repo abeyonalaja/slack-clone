@@ -1,5 +1,4 @@
 defmodule Sling.Auth.Pipeline do
-  @moduledoc false
   use Guardian.Plug.Pipeline,
     otp_app: :sling,
     module: Sling.Auth.Guardian,

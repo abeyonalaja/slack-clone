@@ -12,11 +12,20 @@ defmodule SlingWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
+    with {:ok, %User{} = user} <- Accounts.register_user(user_params) do
+      conn = Sling.Auth.Guardian.Plug.sign_in(conn, user)
+      token = Guardian.Plug.current_token(conn)
+
       conn
       |> put_status(:created)
-      |> put_resp_header("location", Routes.user_path(conn, :show, user))
-      |> render("show.json", user: user)
+      |> put_view(SlingWeb.SessionView)
+      |> render("show.json", user: user, jwt: token)
+    else
+      {:error, %Ecto.Changeset{} = changeset} ->
+        conn
+        |> put_status(:unauthorized)
+        |> put_view(SlingWeb.ChangesetView)
+        |> render("error.json", %{changeset: changeset})
     end
   end
 

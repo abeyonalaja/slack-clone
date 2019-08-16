@@ -17,6 +17,10 @@ config :sling, SlingWeb.Endpoint,
   render_errors: [view: SlingWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: Sling.PubSub, adapter: Phoenix.PubSub.PG2]
 
+config :sling, Sling.Auth.Guardian,
+  issuer: "sling",
+  ttl: {30, :days}
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

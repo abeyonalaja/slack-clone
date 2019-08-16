@@ -13,6 +13,8 @@ config :sling, SlingWeb.Endpoint,
   url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :sling, Sling.Auth.Guardian, secret_key: System.get_env("GUARDIAN_SECRET_KEY")
+
 # Do not print debug messages in production
 config :logger, level: :info
 
