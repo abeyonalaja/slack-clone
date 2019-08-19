@@ -10,7 +10,9 @@ import createHistory from "history/createBrowserHistory";
 const history = createHistory();
 
 ReactDOM.render(
-  <App history={history} store={store} />,
+  <Provider store={store}>
+    <App history={history} store={store} />
+  </Provider>,
   document.getElementById("root")
 );
 
