@@ -11,7 +11,7 @@ defmodule SlingWeb.UserController do
     render(conn, "index.json", users: users)
   end
 
-  def create(conn, %{"user" => user_params}) do
+  def create(conn, user_params) do
     with {:ok, %User{} = user} <- Accounts.register_user(user_params) do
       conn = Sling.Auth.Guardian.Plug.sign_in(conn, user)
       token = Guardian.Plug.current_token(conn)

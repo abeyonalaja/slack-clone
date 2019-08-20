@@ -42,7 +42,8 @@ defmodule Sling.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:pbkdf2_elixir, "~> 1.0"},
-      {:guardian, "~> 1.1.1"}
+      {:guardian, "~> 1.1.1"},
+      {:cors_plug, "~> 2.0.0"}
     ]
   end
 

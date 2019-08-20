@@ -40,5 +40,6 @@ defmodule SlingWeb.Endpoint do
     key: "_sling_key",
     signing_salt: "w/gkUQ89"
 
+  plug CORSPlug
   plug SlingWeb.Router
 end

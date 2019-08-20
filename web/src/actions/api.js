@@ -2,11 +2,12 @@ const API = process.env.REACT_APP_API_URL;
 
 function headers() {
   const token = JSON.parse(localStorage.getItem("token"));
+  console.log("HEADERS TOKEN ", token);
 
   return {
     Accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: `Bearer: ${token}`
+    authorization: `Bearer ${token}`
   };
 }
 

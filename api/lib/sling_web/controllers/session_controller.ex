@@ -8,10 +8,10 @@ defmodule SlingWeb.SessionController do
     case authenticate(params) do
       {:ok, user} ->
         conn = Guardian.Plug.sign_in(conn, user)
-        token = Guardian.Plug.current_token(conn)
+        jwt= Guardian.Plug.current_token(conn)
         conn
         |> put_status(:created)
-        |> render("show.json", user: user, token: token)
+        |> render("show.json", user: user,jwt: jwt)
       {:error, _} ->
         conn
         |> put_status(:unauthorized)
@@ -31,14 +31,18 @@ defmodule SlingWeb.SessionController do
   def refresh(conn, _params) do
     user = Guardian.Plug.current_resource(conn)
     jwt = Guardian.Plug.current_token(conn)
-    {:ok, claims} = Guardian.Plug.claims(conn)
+#    {:ok, claims} = Guardian.Plug.claims(conn)
 
-    case Guardian.refresh!(jwt, claims, %{ttl: {30, :days}}) do
-      {:ok, new_jwt, _new_claims} ->
+    IO.puts("JWT USER >>> ")
+    IO.inspect(user)
+    case Guardian.refresh(jwt) do
+      {:ok, _old_jwt, {new_token, new_claims}} ->
+      IO.puts("REFRESH")
         conn
         |> put_status(:ok)
-        |> render("show.json", user: user, jwt: new_jwt)
+        |> render("show.json", user: user, jwt: new_token)
       {:error, _reason} ->
+        IO.puts("FAILED")
         conn
         |> put_status(:unauthorized)
         |> render("forbidden.json", error: "Not authenticated")

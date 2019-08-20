@@ -11,14 +11,13 @@ class SignUp extends Component {
   };
 
   handleSignUp = data => {
-    this.props.signup(data, this.context.router);
+    this.props.signup(data, this.props.history);
   };
 
   render() {
     console.log("Sign up", this.props);
     return (
       <div style={{ flex: "1" }}>
-        asdfasd
         <Navbar />
         <SignupForm onSubmit={this.handleSignUp} />
       </div>
