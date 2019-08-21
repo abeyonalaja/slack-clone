@@ -44,6 +44,7 @@ export function authenticate() {
       })
       .catch(() => {
         localStorage.removeItem("token");
-        // window.location = "/login";
+        window.location = "/login";
       });
 }
+export const unauthenticate = () => ({ type: "AUTHENTICATION_FAILURE" });
